@@ -3,9 +3,10 @@ import cors from "cors";
 import { synergies } from "./data/synergies.js";
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
+const ALLOWED_ORIGIN = process.env.FRONTEND_URL || "http://localhost:5173";
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: ALLOWED_ORIGIN }));
 app.use(express.json());
 
 function shuffleArray(array) {
