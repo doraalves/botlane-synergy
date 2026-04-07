@@ -4,6 +4,11 @@ const BASE_URL = import.meta.env.VITE_API_URL
   ? `${import.meta.env.VITE_API_URL}/api`
   : "/api";
 
+export async function trackVisit() {
+  // Ignora erros silenciosamente — não deve quebrar o site se falhar
+  await fetch(`${BASE_URL}/visit`, { method: "POST" }).catch(() => {});
+}
+
 export async function fetchDuos(mood) {
   const response = await fetch(`${BASE_URL}/duos?mood=${mood}`);
   if (!response.ok) {

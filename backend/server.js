@@ -9,6 +9,24 @@ const ALLOWED_ORIGIN = process.env.FRONTEND_URL || "http://localhost:5173";
 app.use(cors({ origin: ALLOWED_ORIGIN }));
 app.use(express.json());
 
+// Contador em memória — reseta quando o servidor reinicia
+let visitCount = 0;
+
+async function notifyDiscord(message) {
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  if (!webhookUrl) return; // silenciosamente ignora se não configurado
+
+  try {
+    await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: message }),
+    });
+  } catch (err) {
+    console.error("Erro ao notificar Discord:", err.message);
+  }
+}
+
 function shuffleArray(array) {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -17,6 +35,18 @@ function shuffleArray(array) {
   }
   return arr;
 }
+
+// Rota chamada pelo frontend quando o site é aberto
+app.post("/api/visit", async (req, res) => {
+  visitCount++;
+
+  const now = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+  const message = `🎮 **Bot Synergy** recebeu uma visita!\n📊 Total desde o último restart: **${visitCount}**\n🕐 ${now}`;
+
+  await notifyDiscord(message);
+
+  res.json({ visits: visitCount });
+});
 
 app.get("/api/duos", (req, res) => {
   const { mood } = req.query;
@@ -30,7 +60,6 @@ app.get("/api/duos", (req, res) => {
   let selected;
 
   if (mood === "divertir") {
-    // Guarantee at least one S-tier in the result
     const sTier = pool.filter((d) => d.tier === "S");
     const rest = pool.filter((d) => d.tier !== "S");
     const pickedS = shuffleArray(sTier).slice(0, 1);

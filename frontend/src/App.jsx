@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MoodButton from "./components/MoodButton.jsx";
 import DuoCard from "./components/DuoCard.jsx";
 import LoadingSpinner from "./components/LoadingSpinner.jsx";
 import TierLegend from "./components/TierLegend.jsx";
-import { fetchDuos } from "./services/api.js";
+import { fetchDuos, trackVisit } from "./services/api.js";
 
 export default function App() {
+  // Registra visita uma vez quando o site abre
+  useEffect(() => {
+    trackVisit();
+  }, []);
+
   const [mood, setMood] = useState(null);
   const [duos, setDuos] = useState([]);
   const [loading, setLoading] = useState(false);
