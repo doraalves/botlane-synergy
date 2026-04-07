@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --lol-gold: #c89b3c;
+  --lol-gold-light: #f0e6d3;
+  --lol-bg: #010a13;
+  --lol-surface: #0a1628;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--lol-bg);
+  color: var(--lol-gold-light);
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #010a13;
+}
+::-webkit-scrollbar-thumb {
+  background: #c89b3c;
+  border-radius: 3px;
+}
+
+/* Decorative gold divider */
+.lol-divider {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c89b3c, transparent);
+}
+.lol-divider::before,
+.lol-divider::after {
+  content: "◆";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #c89b3c;
+  font-size: 10px;
+  line-height: 1;
+}
+.lol-divider::before {
+  left: 20%;
+}
+.lol-divider::after {
+  right: 20%;
+}
+
+/* Corner decorations for panel boxes */
+.lol-panel {
+  position: relative;
+  border: 1px solid rgba(200, 155, 60, 0.2);
+}
+.lol-panel::before,
+.lol-panel::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: #c89b3c;
+  border-style: solid;
+  z-index: 1;
+}
+.lol-panel::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.lol-panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
