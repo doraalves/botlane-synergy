@@ -41,7 +41,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-lol-bg flex flex-col">
-
       {/* HEADER — full width, content centered inside */}
       <header className="relative text-center py-10 px-4 overflow-hidden w-full">
         <div className="absolute inset-0 bg-header-bg opacity-90" />
@@ -65,7 +64,8 @@ export default function App() {
           </div>
 
           <p className="text-lol-gold-light/70 text-base max-w-md font-lol-body">
-            Escolha seu estilo de jogo e descubra os melhores duos para a bot lane
+            Escolha seu estilo de jogo e descubra os melhores duos para a bot
+            lane
           </p>
         </div>
       </header>
@@ -123,7 +123,6 @@ export default function App() {
 
             {/* Cards + Legend side by side */}
             <div className="flex gap-6 items-start">
-
               {/* Duo cards grid */}
               <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 {duos.map((duo, index) => (
@@ -161,6 +160,8 @@ export default function App() {
       <footer className="text-center py-4 border-t border-lol-gold/10 w-full">
         <p className="text-lol-gold/30 text-xs tracking-widest uppercase">
           Bot Synergy • Riot Games Data Dragon • Not affiliated with Riot Games
+          • Desenvolvido por{" "}
+          <a href="https://doraalves.github.io/portfolio"> Izadora Alves</a>
         </p>
       </footer>
     </div>

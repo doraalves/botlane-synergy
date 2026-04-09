@@ -1,5 +1,7 @@
 # Bot Synergy
 
+🔗 **[botsynergy.vercel.app](https://botsynergy.vercel.app)**
+
 Projeto full-stack para portfólio — ajuda jogadores de League of Legends a escolherem duos para bot lane em dois modos: **Jogar Sério** (meta/sinergia técnica) e **Se Divertir** (off-meta/combos insanos).
 
 ---
